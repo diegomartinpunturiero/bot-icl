@@ -1,0 +1,12 @@
+{
+  "institute": "ICL",
+  "advisor_whatsapp": "",
+  "courses": [
+    {"id": "aire", "name": "Instalación y reparación de aire acondicionado", "keywords": ["aire acondicionado", "split", "climatizacion", "instalacion"], "modality": null, "price": null},
+    {"id": "inverter", "name": "Aire acondicionado Inverter", "keywords": ["inverter"], "modality": null, "price": null},
+    {"id": "heladeras", "name": "Heladeras familiares y No Frost", "keywords": ["heladera", "heladeras", "no frost"], "modality": null, "price": null},
+    {"id": "comercial", "name": "Refrigeración comercial y cámaras", "keywords": ["refrigeracion comercial", "camara", "camaras", "comercial"], "modality": null, "price": null},
+    {"id": "lavarropas", "name": "Reparación de lavarropas", "keywords": ["lavarropas", "lavadora"], "modality": null, "price": null},
+    {"id": "electronica", "name": "Electrónica aplicada", "keywords": ["electronica", "placa", "placas"], "modality": null, "price": null}
+  ]
+}

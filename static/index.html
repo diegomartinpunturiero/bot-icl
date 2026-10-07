@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Consultas de cursos ICL</title>
+<style>
+body{font:17px system-ui;background:#eef2f6;margin:0;color:#172b42}main{max-width:700px;margin:32px auto;padding:24px;background:white;border-radius:16px}#chat{white-space:pre-wrap;min-height:250px}p{padding:12px;background:#f2f5f9;border-radius:8px}form{display:flex;gap:8px}input{flex:1;min-width:0;padding:12px}button{padding:12px;background:#173d67;color:white;border:0;border-radius:6px}a{display:block;margin:12px 0}
+</style>
+<main><h1>ICL · Consultas de cursos</h1><p>Demo local. Escribí «menú», el curso que te interesa o «asesor».</p>
+<div id="chat" role="log" aria-live="polite"></div>
+<form><input aria-label="Mensaje" maxlength="2000" required autocomplete="off"><button>Enviar</button></form></main>
+<script>
+const form=document.querySelector('form'), input=document.querySelector('input'), chat=document.querySelector('#chat');
+let session=null;
+function line(text){const p=document.createElement('p');p.textContent=text;chat.append(p);p.scrollIntoView({block:'nearest'});}
+form.addEventListener('submit',async e=>{e.preventDefault();const message=input.value.trim();if(!message)return;
+form.querySelector('button').disabled=true;line('Vos: '+message);
+try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,session_id:session})});
+const data=await response.json();if(!response.ok)throw Error(data.error);session=data.session_id;line('ICL: '+data.reply);input.value='';
+if(data.contact_url){const a=document.createElement('a');a.href=data.contact_url;a.textContent='Contactar al equipo por WhatsApp';a.target='_blank';a.rel='noopener noreferrer';chat.append(a);}
+}catch(err){line('No se pudo enviar: '+err.message);}finally{form.querySelector('button').disabled=false;input.focus();}});
+</script></html>
